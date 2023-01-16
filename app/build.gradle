@@ -1,0 +1,104 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk(Config.compileSdk)
+
+    defaultConfig {
+        applicationId "com.arvindmehra.nasagallery"
+        minSdk(Config.minSdk)
+        targetSdk(Config.targetSdk)
+        versionCode(Config.versionCode)
+        versionName(Config.versionName)
+        buildConfigField("String", "API_BASE", "\"https://raw.githubusercontent.com/\"")
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+        buildConfig true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.3.0"
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    implementation(Deps.core_ktx)
+    implementation(Deps.compose_ui)
+    implementation(Deps.compose_material)
+    implementation(Deps.compose_junit)
+    implementation(Deps.compose_activity)
+    implementation(Deps.compose_tooling)
+
+    //Dagger - Hilt
+    implementation(Deps.hilt)
+    implementation(Deps.hilt_navigation)
+    kapt(Deps.hilt_compiler)
+
+    // For instrumentation tests
+    androidTestImplementation(Deps.hilt_android_test)
+    kaptAndroidTest(Deps.hilt_test)
+
+    // For local unit tests
+    testImplementation(Deps.hilt_android_test)
+    kaptTest(Deps.hilt_test)
+
+    //retrofit
+    implementation(Deps.retrofit)
+    implementation(Deps.retrofit_gson)
+    implementation(Deps.okhttp3)
+    implementation(Deps.okhttp3_interceptor)
+
+    // Compose dependencies
+    implementation(Deps.compose_viewmodel)
+    implementation(Deps.compose_navigation)
+    implementation(Deps.acompanist_flowlayout)
+
+    // Coroutines
+    implementation(Deps.coroutine_core)
+    implementation(Deps.coroutine_android)
+    testImplementation(Deps.coroutine_test)
+
+    // Coroutine Lifecycle Scopes
+    implementation(Deps.lifecycle_viewmodel_ktx)
+    implementation(Deps.lifecycle_runtime_ktx)
+
+    //coil
+    implementation(Deps.coil)
+
+    //navigation-accompanist
+    implementation(Deps.acompanist_naviagtion)
+
+    testImplementation(Deps.junit4)
+    androidTestImplementation(Deps.android_junit)
+    androidTestImplementation(Deps.compose_junit)
+    debugImplementation(Deps.compose_tooling)
+    debugImplementation(Deps.compose_debug)
+}

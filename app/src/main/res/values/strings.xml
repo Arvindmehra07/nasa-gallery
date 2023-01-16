@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NasaGallery</string>
+    <string name="top_bar_title">Images</string>
+    <string name="network_error">Error in loading. Please try again.</string>
+</resources>
